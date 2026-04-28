@@ -134,7 +134,7 @@ The following table summarizes the performance (Mean Absolute Error) across all 
 | **DIR (LDS + FDS)** | 8.216 | 6.227 | 12.053 | 19.558 |
 | **Multimodal (ResNet + MLP)** | 5.221 | **4.654** | 5.628 | 9.663 |
 | **Metadata Only (TabPFN)** | **5.1631** | 4.7426 | 6.0816 | 7.3519 |
-| **Multimodal (TabPFN + PCA)** | 5.2130** | 5.1656 | **5.1869** | **5.7106** |
+| **Multimodal (TabPFN + PCA)** | 5.2130 | 5.1656 | **5.1869** | **5.7106** |
 
 ---
 
@@ -142,10 +142,8 @@ The following table summarizes the performance (Mean Absolute Error) across all 
 
 All code for data preprocessing, training pipelines, and evaluation metrics is provided in this GitHub repository.
 
-**Pre-trained Weights**:
-* Visual Backbone (ResNet50): `weights/resnet50_dir.pth`
-* Metadata MLP: `weights/metadata_mlp.pth`
-* TabPFN Checkpoints: `weights/tabpfn_fusion.pth`
+**Trained Weights**:
+* Visual Backbone (ResNet50): 
 
 ## 🔗 References
 * Yang, Y., Zha, K., Chen, Y. C., Wang, H., & Katabi, D. (2021). [Delving into Deep Imbalanced Regression](https://arxiv.org/abs/2102.09554). ICML.
