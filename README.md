@@ -25,15 +25,25 @@ My experiments are divided into three primary modeling strategies:
 ## 🧹 Data Preprocessing & Splitting
 * **Cleaning**: Filtered corrupted files and extreme outliers (e.g., `-9999`), resulting in a final dataset of **81,044** files.
 * **Camera-based Split**: Data is split by unique camera IDs to ensure model generalizability. The test set acts as an external dataset to evaluate real-world performance.
-* **Balanced Evaluation**: Following DIR best practices, validation and test sets are capped at **200 cases per label** to ensure a uniform distribution for an unbiased assessment.
+* **Balanced Evaluation**: Following DIR best practices, validation and test sets are capped at **200 cases per label** (at most 200 cases per label) to ensure a uniform distribution for an unbiased assessment.
 
 ### Train/Val/Test Split
 
-* **Train**: 64,939 samples 
-* **Validation**: 6,270 samples 
-* **Test**: 5,113 samples
-  
-[View Dataset](imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv)
+| Split | Number of Samples |
+| :--- | :--- |
+| **Train** | 64,939 |
+| **Validation** | 6,270 |
+| **Test** | 5,117 |
+
+#### Test Set Distribution (by Shot Frequency)
+To evaluate the effectiveness of the DIR approach across the entire range, the test set is categorized by how many samples per label were present in the original training data:
+
+* **Many-shot**: 3,903 samples
+* **Medium-shot**: 800 samples
+* **Low-shot**: 414 samples
+
+---
+🔗 [View Dataset](imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv)
 
 ## ⚙️ Implementation Details
 To adapt the original DIR implementation to temperature data, I configured the following:
