@@ -11,8 +11,8 @@ This repository focuses on using different methodologies including **DIR** and *
     * [ResNet50 + DIR + Metadata Fusion](#beyond-image-only-resnet-multimodal-fusion)
     * [TabPFN (Metadata Only)](#improving-the-multimodal-framework-a-tabular-centric-approach)
     * [TabPFN (Multimodal)](#improving-the-multimodal-framework-a-tabular-centric-approach)
-* [Results Table](#-results-table)
-* [Limitations](#-limitations)
+* [Results Table](#results-table)
+* [Limitations](#limitations)
 
 ---
 
