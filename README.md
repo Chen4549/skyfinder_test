@@ -11,8 +11,8 @@ This repository focuses on using different methodologies including **DIR** and *
     * [ResNet50 + DIR + Metadata Fusion](#beyond-image-only-resnet-multimodal-fusion)
     * [TabPFN (Metadata Only)](#improving-the-multimodal-framework-a-tabular-centric-approach)
     * [TabPFN (Multimodal)](#improving-the-multimodal-framework-a-tabular-centric-approach)
-* [Limitations](#-limitations)
 * [Results Table](#-results-table)
+* [Limitations](#-limitations)
 
 ---
 
@@ -76,7 +76,7 @@ Below is the distribution after smoothing:
   <img src="assets/smoothed_dist_ks5_sigma2.png" width="500" alt="Smoothed Distribution">
 </p>
 
-## 📈 Performance Comparison
+### 📈 Performance Comparison
 I experimented different settings, including the Vanilla ResNet50 against various DIR configurations.
 
 | Method | Overall MAE | Many-Shot MAE | Median-Shot MAE | Low-Shot MAE |
@@ -167,7 +167,7 @@ In conclusion, this project demonstrates that temperature prediction from outdoo
 
 ---
 
-### Results Table
+## Results Table
 
 The following table summarizes the performance (Mean Absolute Error) across all evaluated methodologies.
 
@@ -183,7 +183,7 @@ The following table summarizes the performance (Mean Absolute Error) across all 
 
 ---
 
-### Limitations
+## Limitations
 
 Despite the significant improvements achieved in this project, I have identified several key limitations that provide a roadmap for future research:
 
