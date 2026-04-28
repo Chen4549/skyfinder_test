@@ -28,11 +28,25 @@ Ensure the directory structure follows this format:
 └── ...
 ```
 
+---
+
 ## 2. Model Checkpoints
 1. Download the pre-trained weights for the visual backbone here: [Trained Visual Backbone (ResNet50): ](https://drive.google.com/file/d/1V1J7Kl0pYi-xetWGhLBhnC0gZFyYhwk1/view?usp=drive_link)
 2. Place the downloaded file in the following location: `./imbalanced-regression/Skyfinder-dir/checkpoint/ckpt.best.pth.tar`
 
-## 3. Running Evaluation
+---
+
+## 3. Conda Env set up:
+
+`conda env create -f skyfinder.yml`
+
+then
+
+`conda activate skyfinder-env`
+
+---
+
+## 4. Running Evaluation
 
 Once the data and checkpoints are in place, you can proceed with the evaluation scripts.
 
