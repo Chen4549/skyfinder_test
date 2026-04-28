@@ -7,10 +7,10 @@ This repository focuses on using different methodologies including **DIR** and *
 ## 📋 Overview & Table of contents
 * [Dataset & Preprocessing](#-dataset-skyfinder)
 * [Methodology & Results](#-methodology-deep-imbalanced-regression-dir)
-    * [ResNet50 + DIR](#-methodology-deep-imbalanced-regression-dir)
-    * [ResNet50 + DIR + Metadata Fusion](#-beyond-image-only-resnet-multimodal-fusion)
-    * [TabPFN (Metadata Only)](#-improving-the-multimodal-framework-a-tabular-centric-approach)
-    * [TabPFN (Multimodal)](#-improving-the-multimodal-framework-a-tabular-centric-approach)
+    * [ResNet50 + DIR](#-implementation-details-resnet50--dir)
+    * [ResNet50 + DIR + Metadata Fusion](#beyond-image-only-resnet-multimodal-fusion)
+    * [TabPFN (Metadata Only)](#improving-the-multimodal-framework-a-tabular-centric-approach)
+    * [TabPFN (Multimodal)](#improving-the-multimodal-framework-a-tabular-centric-approach)
 * [Limitations](#-limitations)
 * [Results Table](#-results-table)
 
