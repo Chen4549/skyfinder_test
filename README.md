@@ -1,6 +1,8 @@
 # Skyfinder Temperature Prediction with Deep Imbalanced Regression (DIR) and Multimodal methodologies
 
-This repository implements a multimodal deep learning approach for temperature regression using the **Skyfinder** dataset. This project also integrate **Deep Imbalanced Regression (DIR)** techniques, this project addresses the performance degradation typically seen at extreme temperature ranges.
+This repository implements different approaches in deep learning for temperature regression using the **Skyfinder** dataset. 
+
+This project also integrate **Deep Imbalanced Regression (DIR)** techniques, that addresses the performance degradation typically seen at extreme temperature ranges.
 
 ## 📊 Dataset: Skyfinder
 The [Skyfinder dataset](https://cs.valdosta.edu/~rpmihail/skyfinder/) contains over 80,000 labeled instances captured from 47 cameras betIen 2011 and 2014.
