@@ -38,7 +38,7 @@ Ensure the directory structure follows this format:
 
 ## 3. Conda Env set up:
 
-Conda env is saved to a .yml file at [Env yaml](environment.yml)
+Conda env is saved to a .yml file at [Env yaml](./environment.yml)
 
 `conda env create -f skyfinder.yml`
 
@@ -56,7 +56,7 @@ Once the data and checkpoints are in place, you can proceed with the evaluation 
 
 To evaluate the performance of TabPFN using metadata only, run: `python tabPFN/tab_regression.py`
 
-script is under [TabPFN metadata only script](tabPFN/tab_regression.py)
+script is under [TabPFN metadata only script](./tabPFN/tab_regression.py)
 
 Output is following:
 
@@ -76,7 +76,7 @@ Low: MSE: 61.7589 | MAE: 7.3519 | Count: 414
 
 To get the performance results for both the ResNet+DIR model and the Multimodal TabPFN framework, run: `python ./fusion/concat_pfn.py`
 
-script is under [ResNet+DIR and Multimodal TabPFN script](fusion/concat_pfn.py)
+script is under [ResNet+DIR and Multimodal TabPFN script](./fusion/concat_pfn.py)
 
 Output is following:
 
