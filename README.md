@@ -49,6 +49,11 @@ I compared the Vanilla ResNet50 against various DIR configurations.
 
 **Conclusion**: The DIR method (LDS + FDS) successfully outperformed all other configurations, specifically in the **Low-shot** region, demonstrating its effectiveness in predicting extreme temperature values.
 
+Below is the basic piptline architecture for how I utlize ResNet50:
+<p align="center">
+  <img src="./assets/ResNet.png" width="800" alt="ResNet Fusion Architecture">
+</p>
+
 ## Beyond Image-Only: Multimodal Fusion
 
 Predicting temperature accurately can be challenging when relying solely on visual cues from a window. To address this, I leverage the rich metadata provided by the **Skyfinder** dataset to build a more robust model.
