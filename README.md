@@ -26,6 +26,13 @@ My experiments are divided into three primary modeling strategies:
 * **Cleaning**: Filtered corrupted files and extreme outliers (e.g., `-9999`), resulting in a final dataset of **81,044** files.
 * **Camera-based Split**: Data is split by unique camera IDs to ensure model generalizability. The test set acts as an external dataset to evaluate real-world performance.
 * **Balanced Evaluation**: Following DIR best practices, validation and test sets are capped at **200 cases per label** to ensure a uniform distribution for an unbiased assessment.
+* 
+### Train/Val/Test Split
+
+[View Dataset](./data/skyfinder_30_balanced.csv)
+* **Train**: 64,939 samples 
+* **Validation**: 6,270 samples 
+* **Test**: 5,113 samples 
 
 ## ⚙️ Implementation Details
 To adapt the original DIR implementation to temperature data, I configured the following:
