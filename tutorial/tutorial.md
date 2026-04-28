@@ -72,12 +72,12 @@ Test data size: 5117
 
 --------------------------------------------------
 ===>Train set performance: 
- * Overall: MSE 24.740  L1 3.793        G-Mean 2.406
- * Many: MSE 23.928     L1 3.730        G-Mean 2.366
- * Median: MSE 29.324   L1 4.184        G-Mean 2.673
- * Low: MSE 37.784      L1 4.484        G-Mean 2.821
+ * Overall: MSE 24.868  L1 3.794        G-Mean 2.405
+ * Many: MSE 23.920     L1 3.729        G-Mean 2.366
+ * Median: MSE 29.980   L1 4.179        G-Mean 2.651
+ * Low: MSE 42.690      L1 4.679        G-Mean 2.925
 ===> Extracting 2048-d visual features with mapping...
-100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 40/40 [00:13<00:00,  2.97it/s]
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 40/40 [00:13<00:00,  2.99it/s]
 
 --------------------------------------------------
 ===>Test set performance: 
@@ -86,7 +86,7 @@ Test data size: 5117
  * Median: MSE 203.453  L1 12.053       G-Mean 9.676
  * Low: MSE 428.632     L1 19.558       G-Mean 18.565
 ===> Extracting 2048-d visual features with mapping...
-100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 20/20 [00:06<00:00,  2.87it/s]
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 20/20 [00:06<00:00,  3.08it/s]
 
 --------------------------------------------------
 Applying PCA to compress feature to: 256
@@ -99,10 +99,10 @@ TabPFN input Features:
 Target variable name: label
 
 --- FINAL(RESNET50+TABPFN) EVALUATION RESULTS ---
-Overall: MSE: 43.2188 | MAE: 5.2460 | Count: 5117
-Many: MSE: 44.1304 | MAE: 5.1796 | Count: 3903
-Medium: MSE: 39.9119 | MAE: 5.2677 | Count: 800
-Low: MSE: 41.0152 | MAE: 5.8306 | Count: 414
+Overall: MSE: 42.6316 | MAE: 5.1915 | Count: 5117
+Many: MSE: 43.8716 | MAE: 5.1540 | Count: 3903
+Medium: MSE: 38.9378 | MAE: 5.1816 | Count: 800
+Low: MSE: 38.0791 | MAE: 5.5640 | Count: 414
 ```
 
 ResNet+DIR test set result is under:
@@ -117,10 +117,10 @@ ResNet+DIR test set result is under:
 Multimodal TabPFN result is under:
 ```bash
 --- FINAL(RESNET50+TABPFN) EVALUATION RESULTS ---
-Overall: MSE: 43.2188 | MAE: 5.2460 | Count: 5117
-Many: MSE: 44.1304 | MAE: 5.1796 | Count: 3903
-Medium: MSE: 39.9119 | MAE: 5.2677 | Count: 800
-Low: MSE: 41.0152 | MAE: 5.8306 | Count: 414
+Overall: MSE: 42.6316 | MAE: 5.1915 | Count: 5117
+Many: MSE: 43.8716 | MAE: 5.1540 | Count: 3903
+Medium: MSE: 38.9378 | MAE: 5.1816 | Count: 800
+Low: MSE: 38.0791 | MAE: 5.5640 | Count: 414
 ```
 
 The output also contain information on which data and metadata is used, and how many image features were used.
