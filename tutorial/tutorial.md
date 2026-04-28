@@ -56,10 +56,12 @@ Once the data and checkpoints are in place, you can proceed with the evaluation 
 
 To evaluate the performance of TabPFN using metadata only, run: `python tabPFN/tab_regression.py`
 
+script is under [TabPFN metadata only script](tabPFN/tab_regression.py)
+
 Output is following:
 
 ```bash
-(mmt-env) [hc4549@a100-4022 skyfinder_test]$ python ./tabPFN/tab_regression.py
+(skyfinder-env) [hc4549@a100-4022 skyfinder_test]$ python ./tabPFN/tab_regression.py
 TabPFN Input features: ['Latitude', 'Longitude', 'Month', 'Hour']
 Target variable name: label
 
@@ -74,10 +76,12 @@ Low: MSE: 61.7589 | MAE: 7.3519 | Count: 414
 
 To get the performance results for both the ResNet+DIR model and the Multimodal TabPFN framework, run: `python ./fusion/concat_pfn.py`
 
+script is under [ResNet+DIR and Multimodal TabPFN script](fusion/concat_pfn.py)
+
 Output is following:
 
 ```bash
-(mmt-env) [hc4549@a100-4022 skyfinder_test]$ python ./fusion/concat_pfn.py
+(skyfinder-env) [hc4549@a100-4022 skyfinder_test]$ python ./fusion/concat_pfn.py
 =====> Preparing data...
 File (.csv): tabpfn.csv
 Training data size: 10000
