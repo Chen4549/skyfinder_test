@@ -49,9 +49,9 @@ I compared the Vanilla ResNet50 against various DIR configurations.
 
 **Conclusion**: The DIR method (LDS + FDS) successfully outperformed all other configurations, specifically in the **Low-shot** region, demonstrating its effectiveness in predicting extreme temperature values.
 
-Below is the basic piptline architecture for how I utlize ResNet50:
+Below is the basic pipeline for how I utlize ResNet50 in this approach:
 <p align="center">
-  <img src="./assets/ResNet.png" width="800" alt="ResNet Fusion Architecture">
+  <img src="./assets/ResNet.png" width="500" alt="ResNet Fusion Architecture">
 </p>
 
 ## Beyond Image-Only: Multimodal Fusion
@@ -75,6 +75,11 @@ Our first approach involves a late-fusion strategy to combine visual and tabular
 3.  **Concatenation**: These two vectors are concatenated into a single **2064-dimensional** feature representation.
 4.  **Regression Head**: This combined vector is passed through the final regression layer to produce the temperature prediction.
 
+Below is the diagram of the workflow of this fusion framework:
+<p align="center">
+  <img src="./assets/Multi_resnet.png" width="500" alt="ResNet Fusion Architecture">
+</p>
+
 ### Results
 By introducing these environmental priors, the model can "anchor" its visual findings to a specific geographic location and time of day. This pipeline resulted in a **profound improvement in performance** across the entire temperature range compared to the image-only baseline.
 
@@ -91,7 +96,10 @@ For this approach, I utilized **TabPFN**, a State-of-the-Art (SOTA) transformer-
 3.  **Feature Concatenation**: I combine the 4 core metadata points (Latitude, Longitude, Month, Hour) with the 256 compressed visual features.
 4.  **Tabular-Driven Prediction**: This combined 260-column dataset is fed into TabPFN to generate the final temperature regression.
 
-
+Below is the diagram of the workflow of this fusion framework:
+<p align="center">
+  <img src="./assets/Multi_pfn.png" width="500" alt="ResNet Fusion Architecture">
+</p>
 
 ### Experimental Results
 I compared the performance of TabPFN using metadata alone against the combined image-feature and metadata approach.
