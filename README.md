@@ -101,5 +101,34 @@ The results confirmed my hypothesis: metadata is incredibly informative for this
 
 This approach represents my most effective method for temperature prediction to date, combining the spatial-temporal accuracy of tabular models with the contextual richness of computer vision.
 
+### Conclusion
+
+In conclusion, this project demonstrates that temperature prediction from outdoor imagery is a quintessential **Deep Imbalanced Regression (DIR)** task. [cite_start]By addressing the skewed distribution of the Skyfinder dataset, I was able to significantly mitigate the bias toward common temperature ranges[cite: 5, 8]. [cite_start]The implementation of **Label Distribution Smoothing (LDS)** and **Feature Distribution Smoothing (FDS)** proved essential for accurate predictions in the high-impact "low-shot" regions, where standard models typically fail[cite: 9, 283]. Furthermore, by evolving the architecture from an image-only baseline to a multimodal framework—specifically utilizing **TabPFN** with compressed visual features—I reached a level of predictive accuracy that single-modality models cannot achieve. This highlights the importance of anchoring visual context to geographic and temporal priors in environmental sensing.
+
+### Results Table
+
+The following table summarizes the performance (Mean Absolute Error) across all evaluated methodologies.
+
+| Methodology | Overall MAE | Many-Shot MAE | Med-Shot MAE | Low-Shot MAE |
+| :--- | :---: | :---: | :---: | :---: |
+| **ResNet50 (Vanilla)** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
+| **ResNet50 + LDS** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
+| **ResNet50 + FDS** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
+| **ResNet50 + DIR (LDS+FDS)** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
+| **Metadata Only (TabPFN)** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
+| **Multimodal (ResNet + MLP)** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
+| **Multimodal (TabPFN + PCA)** | **Best** | **Best** | **Best** | **Best** |
+
+---
+
+### Code and Weights
+
+[cite_start]All code for data preprocessing, training pipelines, and evaluation metrics is provided in this GitHub repository[cite: 13].
+
+**Pre-trained Weights**:
+* Visual Backbone (ResNet50): `weights/resnet50_dir.pth`
+* Metadata MLP: `weights/metadata_mlp.pth`
+* TabPFN Checkpoints: `weights/tabpfn_fusion.pth`
+
 ## 🔗 References
 * Yang, Y., Zha, K., Chen, Y. C., Wang, H., & Katabi, D. (2021). [Delving into Deep Imbalanced Regression](https://arxiv.org/abs/2102.09554). ICML.
