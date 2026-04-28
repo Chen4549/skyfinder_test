@@ -38,6 +38,8 @@ Ensure the directory structure follows this format:
 
 ## 3. Conda Env set up:
 
+Conda env is saved to a .yml file at [Env yaml](environment.yml)
+
 `conda env create -f skyfinder.yml`
 
 then
