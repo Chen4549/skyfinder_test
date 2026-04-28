@@ -4,11 +4,32 @@ This repository implements different approaches in deep learning for temperature
 
 This project also integrate **Deep Imbalanced Regression (DIR)** techniques, that addresses the performance degradation typically seen at extreme temperature ranges.
 
+---
+
+## 📋 Overview
+This repository explores various deep learning and tabular modeling approaches to classify data using both image features and structured metadata. Our research evaluates the efficacy of traditional CNN architectures against modern multimodal transformers.
+
+---
+
+## 📂 Table of Contents
+* [Dataset & Preprocessing](#-dataset-skyfinder)
+* [Methodology & Results](#-methodology-deep-imbalanced-regression-dir)
+    * [ResNet50 + DIR](#-implementation-details-resnet50--dir)
+    * [ResNet50 + DIR + Metadata Fusion](#-beyond-image-only-resnet-multimodal-fusion)
+    * [TabPFN (Metadata Only)](#-improving-the-multimodal-framework-a-tabular-centric-approach)
+    * [TabPFN (Multimodal)](#-improving-the-multimodal-framework-a-tabular-centric-approach)
+* [Limitations](#-limitations)
+* [Results Table](#-results-table)
+
+---
+
 ## 📊 Dataset: Skyfinder
 The [Skyfinder dataset](https://cs.valdosta.edu/~rpmihail/skyfinder/) contains over 80,000 labeled instances captured from 47 cameras between 2011 and 2014.
 
 * **Content**: High-resolution scene images paired with environmental metadata (humidity, location, season, time, etc.).
 * **Imbalance Problem**: The dataset exhibits a classic skewed, long-tailed distribution. Standard machine learning models naturally overfit to common "many-shot" temperature regions, leading to high bias and poor performance when predicting rare, critical extreme values.
+
+---
 
 ## 🧠 Methodology: Deep Imbalanced Regression (DIR)
 I utilize the DIR framework proposed by [Yang et al. (2021)](https://dir.csail.mit.edu/) to improve generalization across the entire continuous target range.
@@ -16,11 +37,13 @@ I utilize the DIR framework proposed by [Yang et al. (2021)](https://dir.csail.m
 * **Label Distribution Smoothing (LDS)**: Estimates the "effective" label density by convolving a symmetric kernel with the empirical distribution to account for information overlap betIen nearby continuous targets.
 * **Feature Distribution Smoothing (FDS)**: Calibrates biased feature statistics (mean and covariance) by leveraging similarities between neighboring temperature bins in the feature space.
 
-## 🛠️ Approach
+---
+
+<!-- ## 🛠️ Approach
 My experiments are divided into three primary modeling strategies:
 1.  **Image-based Model + DIR**: Utilizing a ResNet50 backbone enhanced with LDS and FDS.
 2.  **Metadata-based Model**: A standalone regressor focusing on environmental features.
-3.  **Multimodal Fusion**: An ensemble architecture that utilize visual and metadata features for final regression.
+3.  **Multimodal Fusion**: An ensemble architecture that utilize visual and metadata features for final regression. -->
 
 ## 🧹 Data Preprocessing & Splitting
 * **Cleaning**: Filtered corrupted files and extreme outliers (e.g., `-9999`), resulting in a final dataset of **81,044** files.
@@ -45,7 +68,7 @@ To evaluate the effectiveness of the DIR approach across the entire range, the t
 ---
 🔗 [View Dataset](imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv)
 
-## ⚙️ Implementation Details
+## ⚙️ Implementation Details ResNet50 + DIR
 To adapt the original DIR implementation to temperature data, I configured the following:
 
 1.  **Label Shifting**: The temperature range (-27°C to 50°C) is shifted by **+30** to ensure all target bins are positive integers for indexing.
@@ -77,7 +100,9 @@ Below is the basic pipeline for how I utlize ResNet50 in this approach:
   <img src="./assets/ResNet.png" width="500" alt="ResNet Architecture">
 </p>
 
-## Beyond Image-Only: Multimodal Fusion
+---
+
+## Beyond Image-Only: ResNet Multimodal Fusion
 
 Predicting temperature accurately can be challenging when relying solely on visual cues from a window. To address this, I leverage the rich metadata provided by the **Skyfinder** dataset to build a more robust model.
 
@@ -109,6 +134,8 @@ By introducing these environmental priors, the model can "anchor" its visual fin
 | Method | Overall MAE | Many-Shot MAE | Median-Shot MAE | Low-Shot MAE |
 | :--- | :---: | :---: | :---: | :---: |
 | **Multimodal (ResNet + MLP)** | **5.221** | **4.654** | **5.628** | **9.663** |
+
+---
 
 ## Improving the Multimodal Framework: A Tabular-Centric Approach
 
@@ -145,6 +172,8 @@ This approach represents my most effective method for temperature prediction to 
 
 In conclusion, this project demonstrates that temperature prediction from outdoor imagery is a quintessential **Deep Imbalanced Regression (DIR)** task. By addressing the skewed distribution of the Skyfinder dataset, I was able to significantly mitigate the bias toward common temperature ranges. The implementation of **Label Distribution Smoothing (LDS)** and **Feature Distribution Smoothing (FDS)** proved essential for accurate predictions in the high-impact "low-shot" regions, where standard models typically fail. Furthermore, by evolving the architecture from an image-only baseline to a multimodal framework—specifically utilizing **TabPFN** with compressed visual features—reached a level of predictive accuracy that single-modality models cannot achieve. This highlights the importance of anchoring visual context to geographic and temporal priors in environmental sensing.
 
+---
+
 ### Results Table
 
 The following table summarizes the performance (Mean Absolute Error) across all evaluated methodologies.
@@ -172,6 +201,8 @@ Despite the significant improvements achieved in this project, I have identified
 
 #### The Next Iteration: End-to-End Fusion
 My idea for a future architecture is to replace the static PCA with a **trainable MLP** acting as a feature projector. By attaching the TabPFN model directly to this projector and training the entire system end-to-end, the model could learn the optimal way to compress and represent visual data specifically for the tabular transformer's processing style.
+
+---
 
 ### Code and Weights
 
