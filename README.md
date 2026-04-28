@@ -13,7 +13,7 @@ This repository explores various deep learning and tabular modeling approaches t
 * [Dataset & Preprocessing](#-dataset-skyfinder)
 * [Methodology & Results](#-methodology-deep-imbalanced-regression-dir)
     * [ResNet50 + DIR](#-methodology-deep-imbalanced-regression-dir)
-    * [ResNet50 + DIR + Metadata Fusion](#-beyond-image-only:-resnet-multimodal-fusion)
+    * [ResNet50 + DIR + Metadata Fusion](#-beyond-image-only-resnet-multimodal-fusion)
     * [TabPFN (Metadata Only)](#-improving-the-multimodal-framework-a-tabular-centric-approach)
     * [TabPFN (Multimodal)](#-improving-the-multimodal-framework-a-tabular-centric-approach)
 * [Limitations](#-limitations)
