@@ -5,7 +5,7 @@ This repository implements different approaches in deep learning for temperature
 This project also integrate **Deep Imbalanced Regression (DIR)** techniques, that addresses the performance degradation typically seen at extreme temperature ranges.
 
 ## 📊 Dataset: Skyfinder
-The [Skyfinder dataset](https://cs.valdosta.edu/~rpmihail/skyfinder/) contains over 80,000 labeled instances captured from 47 cameras betIen 2011 and 2014.
+The [Skyfinder dataset](https://cs.valdosta.edu/~rpmihail/skyfinder/) contains over 80,000 labeled instances captured from 47 cameras between 2011 and 2014.
 
 * **Content**: High-resolution scene images paired with environmental metadata (humidity, location, season, time).
 * **Imbalance Problem**: The dataset exhibits a classic skeId, long-tailed distribution. Standard machine learning models naturally overfit to common "many-shot" temperature regions, leading to high bias and poor performance when predicting rare, critical extreme values.
