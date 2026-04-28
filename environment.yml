@@ -1,4 +1,4 @@
-name: mmt-env
+name: skyfinder-env
 channels:
   - pytorch
   - nvidia
