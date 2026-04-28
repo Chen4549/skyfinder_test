@@ -48,7 +48,7 @@ then
 
 `conda activate skyfinder-env`
 
-**Note** After setting up the skyfinder-env, please also install compatible torch version with your CUDA. [Torch Download Link](https://pytorch.org/get-started/previous-versions/)
+**Note:** After setting up the skyfinder-env, please also install compatible torch version with your CUDA. [Torch Download Link](https://pytorch.org/get-started/previous-versions/)
 
 ---
 
@@ -62,9 +62,9 @@ To evaluate the performance of TabPFN using metadata only, run:
 
 `python tabPFN/tab_regression.py`
 
-script is under [TabPFN metadata only script](../tabPFN/tab_regression.py)
+script is under [Eval: TabPFN metadata only script](../tabPFN/tab_regression.py)
 
-Output is following:
+Example output is following:
 
 ```bash
 (skyfinder-env) [hc4549@a100-4022 skyfinder_test]$ python ./tabPFN/tab_regression.py
@@ -84,9 +84,9 @@ To get the performance results for both the ResNet+DIR model and the Multimodal 
 
 `python ./fusion/concat_pfn.py`
 
-script is under [ResNet+DIR and Multimodal TabPFN script](../fusion/concat_pfn.py)
+script is under [Eval: ResNet+DIR and Multimodal TabPFN script](../fusion/concat_pfn.py)
 
-Output is following:
+Example output is following:
 
 ```bash
 (skyfinder-env) [hc4549@a100-4022 skyfinder_test]$ python ./fusion/concat_pfn.py
