@@ -1,6 +1,6 @@
 # Evaluation Tutorial
 
-This repository contains the evaluation scripts for our work. The evaluation is divided into three main components:
+This repository contains the evaluation scripts for my work. The evaluation is divided into three main components:
 1. Performance of **ResNet50 + DIR** on the test set.
 2. Performance of **TabPFN** using metadata only.
 3. Performance of the **TabPFN Multimodal Framework**.
