@@ -7,22 +7,20 @@ This project also integrate **Deep Imbalanced Regression (DIR)** techniques, tha
 ## 📊 Dataset: Skyfinder
 The [Skyfinder dataset](https://cs.valdosta.edu/~rpmihail/skyfinder/) contains over 80,000 labeled instances captured from 47 cameras between 2011 and 2014.
 
-* **Content**: High-resolution scene images paired with environmental metadata (humidity, location, season, time).
+* **Content**: High-resolution scene images paired with environmental metadata (humidity, location, season, time, etc.).
 * **Imbalance Problem**: The dataset exhibits a classic skeId, long-tailed distribution. Standard machine learning models naturally overfit to common "many-shot" temperature regions, leading to high bias and poor performance when predicting rare, critical extreme values.
 
 ## 🧠 Methodology: Deep Imbalanced Regression (DIR)
 I utilize the DIR framework proposed by [Yang et al. (2021)](https://dir.csail.mit.edu/) to improve generalization across the entire continuous target range.
 
 * **Label Distribution Smoothing (LDS)**: Estimates the "effective" label density by convolving a symmetric kernel with the empirical distribution to account for information overlap betIen nearby continuous targets.
-* **Feature Distribution Smoothing (FDS)**: Calibrates biased feature statistics (mean and covariance) by leveraging similarities betIen neighboring temperature bins in the feature space.
+* **Feature Distribution Smoothing (FDS)**: Calibrates biased feature statistics (mean and covariance) by leveraging similarities between neighboring temperature bins in the feature space.
 
 ## 🛠️ Approach
-Our experiments are divided into three primary modeling strategies:
+My experiments are divided into three primary modeling strategies:
 1.  **Image-based Model + DIR**: Utilizing a ResNet50 backbone enhanced with LDS and FDS.
 2.  **Metadata-based Model**: A standalone regressor focusing on environmental features.
-3.  **Multimodal Fusion**: An ensemble architecture that concatenates visual encodings with metadata features before final regression.
-
-**Experimental results demonstrate that multimodal fusion methods significantly outperform any single-modality approach.**
+3.  **Multimodal Fusion**: An ensemble architecture that utilize visual and metadata features for final regression.
 
 ## 🧹 Data Preprocessing & Splitting
 * **Cleaning**: Filtered corrupted files and extreme outliers (e.g., `-9999`), resulting in a final dataset of **81,044** files.
@@ -39,8 +37,13 @@ To adapt the original DIR implementation to temperature data, I configured the f
     * **Medium-shot**: 100 - 1000 samples.
     * **Low-shot**: <100 samples.
 
+Below is the distribution after smoothing:
+<p align="center">
+  <img src="./assets/smoothed_dist_ks5_sigma2" width="500" alt="ResNet Fusion Architecture">
+</p>
+
 ## 📈 Performance Comparison
-I compared the Vanilla ResNet50 against various DIR configurations.
+I experimented different settings, including the Vanilla ResNet50 against various DIR configurations.
 
 | Method | Overall MAE | Many-Shot MAE | Median-Shot MAE | Low-Shot MAE |
 | :--- | :---: | :---: | :---: | :---: |
@@ -53,7 +56,7 @@ I compared the Vanilla ResNet50 against various DIR configurations.
 
 Below is the basic pipeline for how I utlize ResNet50 in this approach:
 <p align="center">
-  <img src="./assets/ResNet.png" width="500" alt="ResNet Fusion Architecture">
+  <img src="./assets/ResNet.png" width="500" alt="ResNet Architecture">
 </p>
 
 ## Beyond Image-Only: Multimodal Fusion
@@ -63,14 +66,14 @@ Predicting temperature accurately can be challenging when relying solely on visu
 ### Addressing Data Leakage
 While metadata like dew point or humidity are highly predictive, they often correlate so closely with temperature that including them can lead to **data leakage**—where the model "cheats" by using information that wouldn't be available or would be redundant in a real-world deployment. 
 
-To ensure the model is practical and generalizable, I utilize only the most accessible geographical and temporal information:
+To ensure the model is practical and generalizable, I utilize only the most accessible geographical and temporal information from the dataset:
 * **Latitude**
 * **Longitude**
 * **Month**
 * **Hour**
 
 ### Multimodal Architecture: Parallel Feature Fusion
-Our first approach involves a late-fusion strategy to combine visual and tabular data:
+My first approach involves a intermidiate-fusion strategy to combine visual and tabular data:
 
 1.  **Visual Branch**: The image passes through a **ResNet-50** backbone to extract a **2048-dimensional** feature vector representing visual scene context.
 2.  **Metadata Branch**: In parallel, the four metadata points are fed into a **2-layer Multi-Layer Perceptron (MLP)**, which compresses them into a **16-dimensional** metadata feature vector.
@@ -97,7 +100,7 @@ While my initial approach used a vision-heavy architecture, temperature predicti
 For this approach, I utilized **TabPFN**, a State-of-the-Art (SOTA) transformer-based model specifically designed for tabular data. By treating compressed visual information as additional tabular columns, I created a more balanced and informative feature set.
 
 #### The Pipeline:
-1.  **Visual Feature Extraction**: I use the pre-trained ResNet-50 backbone to extract the high-level 2048-dimensional visual features.
+1.  **Visual Feature Extraction**: I use the trained ResNet-50 (from first part) backbone to extract the high-level 2048-dimensional visual features.
 2.  **PCA Compression**: Because TabPFN is optimized for a specific number of features, I apply **Principal Component Analysis (PCA)** to compress the 2048-d visual vector into **256 dimensions**. This maintains the most critical visual information while making the data compatible with the tabular model.
 3.  **Feature Concatenation**: I combine the 4 core metadata points (Latitude, Longitude, Month, Hour) with the 256 compressed visual features.
 4.  **Tabular-Driven Prediction**: This combined 260-column dataset is fed into TabPFN to generate the final temperature regression.
@@ -140,12 +143,28 @@ The following table summarizes the performance (Mean Absolute Error) across all 
 
 ---
 
+### Limitations
+
+Despite the significant improvements achieved in this project, I have identified several key limitations that provide a roadmap for future research:
+
+* **Reliance on a Traditional Visual Backbone**: While ResNet50 has been a reliable workhorse for image feature extraction, the advent of Vision Transformers (ViTs) has established a new, higher baseline for performance. I believe that scaling up the visual encoder to a more modern architecture is essential to capture the complex visual nuances of the Skyfinder scenes.
+* **Modality Imbalance**: Currently, the metadata features (geographic and temporal) are significantly more informative than the image features. The metadata-only model achieved very strong results, whereas the image-only model struggled. While the fused model does outperform both, the "gap" in predictive power between modalities is quite large. I suspect that a stronger visual backbone would help close this gap and allow the images to contribute more meaningfully to the final prediction.
+* **"Brute Force" Fusion in TabPFN**: My current method of applying PCA and then concatenating image features with metadata is somewhat of a "brute force" solution. Simply appending compressed columns may not be the most efficient way for a model like TabPFN to process high-dimensional visual information.
+* **Lack of End-to-End Optimization**: Currently, the feature extraction and the final regression via TabPFN are decoupled. I believe the most promising path forward is to transition to an end-to-end training pipeline.
+
+#### The Next Iteration: End-to-End Fusion
+My idea for a future architecture is to replace the static PCA with a **trainable MLP** acting as a feature projector. By attaching the TabPFN model directly to this projector and training the entire system end-to-end, the model could learn the optimal way to compress and represent visual data specifically for the tabular transformer's processing style.
+
 ### Code and Weights
 
 All code for data preprocessing, training pipelines, and evaluation metrics is provided in this GitHub repository.
 
+## Evaluation Scripts:
+* [TabPFN regression eval script](./tabPFN/tab_regression.py)
+* [TabPFN Multimodal Fusion script (Include eval for ResNet50+DIR)](./fusion/concat_pfn.py)
+
 **Trained Weights**:
-* Visual Backbone (ResNet50): 
+* [Visual Backbone (ResNet50): ](https://drive.google.com/file/d/1V1J7Kl0pYi-xetWGhLBhnC0gZFyYhwk1/view?usp=drive_link)
 
 ## 🔗 References
 * Yang, Y., Zha, K., Chen, Y. C., Wang, H., & Katabi, D. (2021). [Delving into Deep Imbalanced Regression](https://arxiv.org/abs/2102.09554). ICML.
