@@ -12,8 +12,8 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 def prep():
     # --- 1. LOAD & PREP ---
-    df_full_meta = pd.read_csv('/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv')
-    df = pd.read_csv("/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir/data/tabpfn.csv")
+    df_full_meta = pd.read_csv('./imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv')
+    df = pd.read_csv("./imbalanced-regression/Skyfinder-dir/data/tabpfn.csv")
 
     df = df.dropna(subset=['label'])
 

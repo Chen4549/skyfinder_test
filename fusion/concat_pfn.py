@@ -6,7 +6,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", message=".*Failed to load image Python extension.*")
 
 import sys
-sys.path.insert(0,"/gpfs/data/shenlab/hc4549/skyfinder_test/fusion")
+sys.path.insert(0,"./fusion")
 
 import pandas as pd
 
@@ -19,7 +19,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 from feature_extract import extract
 
 def extract_feature_pfn():
-    feat_dataset = "/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir/data/tabpfn.csv"
+    feat_dataset = "tabpfn.csv"
     reweight = "sqrt_inv"
     lds = True
     lds_ks = 5
@@ -27,7 +27,7 @@ def extract_feature_pfn():
     fds = True
     fds_ks = 5
     fds_sigma = 2
-    checkpoint = "/gpfs/data/shenlab/hc4549/ucla/imbalanced-regression/Skyfinder-dir/checkpoint/skyfinder_30_balanced_resnet50_DIR_BASIC_lds_gau_5_2.0_fds_gau_5_2.0_0_1_0.9_adam_l1_0.001_256/ckpt.best.pth.tar"
+    checkpoint = "./imbalanced-regression/Skyfinder-dir/checkpoint/ckpt.best.pth.tar"
 
     tr_feat, tr_path, te_feat, te_path = extract(feat_dataset, reweight, lds, lds_ks, lds_sigma, fds, fds_ks, fds_sigma, checkpoint)
 
@@ -74,8 +74,8 @@ def pca_pfn(PCA_num=256):
 
 def prep(df_reduced):
     # --- 1. LOAD & PREP ---
-    df_full_meta = pd.read_csv('/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv')
-    df_pfn = pd.read_csv("/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir/data/tabpfn.csv")
+    df_full_meta = pd.read_csv('./imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv')
+    df_pfn = pd.read_csv("./imbalanced-regression/Skyfinder-dir/data/tabpfn.csv")
 
     df_pfn = df_pfn.dropna(subset=['label'])
 

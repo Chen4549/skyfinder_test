@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0,'/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir')
+sys.path.insert(0,'./imbalanced-regression/Skyfinder-dir')
 
 import os
 import time
@@ -155,19 +155,19 @@ def extract(feat_dataset, reweight, lds, lds_ks, lds_sigma, fds, fds_ks, fds_sig
     # Data
     print('=====> Preparing data...')
     print(f"File (.csv): {feat_dataset}")
-    df = pd.read_csv(os.path.join("/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir", f"{feat_dataset}"))
+    df = pd.read_csv(os.path.join("./imbalanced-regression/Skyfinder-dir/data", f"{feat_dataset}"))
     df_train, df_val, df_test = df[df['split'] == 'train'], df[df['split'] == 'val'], df[df['split'] == 'test']
 
-    df_og = pd.read_csv('/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv')
+    df_og = pd.read_csv('./imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv')
     df_train_og = df_og[df_og['split'] == 'train']
     train_labels = df_train_og['label']
 
-    train_dataset = AgeDB(data_dir='/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir', df=df_train, img_size=224, split='train',
+    train_dataset = AgeDB(data_dir='', df=df_train, img_size=224, split='train',
                           reweight=reweight, lds=lds, lds_kernel="gaussian", lds_ks=lds_ks, lds_sigma=lds_sigma)
 
-    val_dataset = AgeDB(data_dir='/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir', df=df_val, img_size=224, split='val')
+    val_dataset = AgeDB(data_dir='', df=df_val, img_size=224, split='val')
 
-    test_dataset = AgeDB(data_dir='/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir', df=df_test, img_size=224, split='test')
+    test_dataset = AgeDB(data_dir='', df=df_test, img_size=224, split='test')
 
     train_loader = DataLoader(train_dataset, batch_size=256, shuffle=True,
                               num_workers=32, pin_memory=True, drop_last=False)
@@ -210,7 +210,7 @@ def extract(feat_dataset, reweight, lds, lds_ks, lds_sigma, fds, fds_ks, fds_sig
 
 if __name__ == '__main__':
     #Example usage
-    feat_dataset = "/gpfs/data/shenlab/hc4549/skyfinder_test/imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv"
+    feat_dataset = "./imbalanced-regression/Skyfinder-dir/data/skyfinder_30_balanced.csv"
     reweight = "sqrt_inv"
     lds = True
     lds_ks = 5
@@ -218,6 +218,6 @@ if __name__ == '__main__':
     fds = True
     fds_ks = 5
     fds_sigma = 2
-    checkpoint = "/gpfs/data/shenlab/hc4549/ucla/imbalanced-regression/Skyfinder-dir/checkpoint/skyfinder_30_balanced_resnet50_DIR_BASIC_lds_gau_5_2.0_fds_gau_5_2.0_0_1_0.9_adam_l1_0.001_256/ckpt.best.pth.tar"
+    checkpoint = "./imbalanced-regression/Skyfinder-dir/checkpoint/skyfinder_30_balanced_resnet50_DIR_BASIC_lds_gau_5_2.0_fds_gau_5_2.0_0_1_0.9_adam_l1_0.001_256/ckpt.best.pth.tar"
 
     train_feat_vectors, train_paths, test_feat_vectors, test_paths = extract(feat_dataset, reweight, lds, lds_ks, lds_sigma, fds, fds_ks, fds_sigma, checkpoint)
