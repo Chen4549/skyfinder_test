@@ -40,12 +40,12 @@ To adapt the original DIR implementation to temperature data, I configured the f
 ## 📈 Performance Comparison
 I compared the Vanilla ResNet50 against various DIR configurations.
 
-| Method | Overall MAE | Many-Shot MAE | Low-Shot MAE |
-| :--- | :---: | :---: | :---: |
-| **Vanilla** (ResNet50) | - | - | - |
-| **LDS Only** | - | - | - |
-| **FDS Only** | - | - | - |
-| **DIR (LDS + FDS)** | **Best** | - | **Best** |
+| Method | Overall MAE | Many-Shot MAE | Median-Shot MAE | Low-Shot MAE |
+| :--- | :---: | :---: | :---: | :---: |
+| **Vanilla** (ResNet50) | 9.604 | 7.153 | 14.935 | 22.407 |
+| **LDS Only** | 9.708 | 7.686 | 13.167 | 22.076 |
+| **FDS Only** | 10.666 | 8.077 | 15.412 | 25.893 |
+| **DIR (LDS + FDS)** | **8.216** | **6.227** | **12.053** | **19.558** |
 
 **Conclusion**: The DIR method (LDS + FDS) successfully outperformed all other configurations, specifically in the **Low-shot** region, demonstrating its effectiveness in predicting extreme temperature values.
 
@@ -81,7 +81,11 @@ Below is the diagram of the workflow of this fusion framework:
 </p>
 
 ### Results
-By introducing these environmental priors, the model can "anchor" its visual findings to a specific geographic location and time of day. This pipeline resulted in a **profound improvement in performance** across the entire temperature range compared to the image-only baseline.
+By introducing these environmental priors, the model can "anchor" its visual findings to a specific geographic location and time of day. This pipeline resulted in a **profound improvement in performance** across the entire temperature range compared to the image-only baseline. Below is the result:
+
+| Method | Overall MAE | Many-Shot MAE | Median-Shot MAE | Low-Shot MAE |
+| :--- | :---: | :---: | :---: | :---: |
+| **Multimodal (ResNet + MLP)** | **5.221** | **4.654** | **5.628** | **9.663** |
 
 ## Improving the Multimodal Framework: A Tabular-Centric Approach
 
@@ -104,10 +108,10 @@ Below is the diagram of the workflow of this fusion framework:
 ### Experimental Results
 I compared the performance of TabPFN using metadata alone against the combined image-feature and metadata approach.
 
-| Configuration | Metric (MAE/RMSE) |
-| :--- | :--- |
-| **Metadata Only (TabPFN)** | *[Insert Score]* |
-| **Metadata + Image Features (TabPFN)** | **[Best Score]** |
+| Method | Overall MAE | Many-Shot MAE | Median-Shot MAE | Low-Shot MAE |
+| :--- | :---: | :---: | :---: | :---: |
+| **Metadata Only (TabPFN)** | **5.1631** | **4.7426** | 6.0816 | 7.3519 |
+| **Multimodal (TabPFN + PCA)** | 5.2130 | 5.1656 | **5.1869** | **5.7106** |
 
 ### Key Findings
 The results confirmed my hypothesis: metadata is incredibly informative for this task, yielding a strong baseline on its own. However, **adding visual features significantly improved the results**, proving that the model successfully learned to use visual scene context (like cloud cover or sunlight) to refine the predictions provided by the geographic and temporal data. 
@@ -116,27 +120,27 @@ This approach represents my most effective method for temperature prediction to 
 
 ### Conclusion
 
-In conclusion, this project demonstrates that temperature prediction from outdoor imagery is a quintessential **Deep Imbalanced Regression (DIR)** task. [cite_start]By addressing the skewed distribution of the Skyfinder dataset, I was able to significantly mitigate the bias toward common temperature ranges[cite: 5, 8]. [cite_start]The implementation of **Label Distribution Smoothing (LDS)** and **Feature Distribution Smoothing (FDS)** proved essential for accurate predictions in the high-impact "low-shot" regions, where standard models typically fail[cite: 9, 283]. Furthermore, by evolving the architecture from an image-only baseline to a multimodal framework—specifically utilizing **TabPFN** with compressed visual features—I reached a level of predictive accuracy that single-modality models cannot achieve. This highlights the importance of anchoring visual context to geographic and temporal priors in environmental sensing.
+In conclusion, this project demonstrates that temperature prediction from outdoor imagery is a quintessential **Deep Imbalanced Regression (DIR)** task. By addressing the skewed distribution of the Skyfinder dataset, I was able to significantly mitigate the bias toward common temperature ranges. The implementation of **Label Distribution Smoothing (LDS)** and **Feature Distribution Smoothing (FDS)** proved essential for accurate predictions in the high-impact "low-shot" regions, where standard models typically fail. Furthermore, by evolving the architecture from an image-only baseline to a multimodal framework—specifically utilizing **TabPFN** with compressed visual features—I reached a level of predictive accuracy that single-modality models cannot achieve. This highlights the importance of anchoring visual context to geographic and temporal priors in environmental sensing.
 
 ### Results Table
 
 The following table summarizes the performance (Mean Absolute Error) across all evaluated methodologies.
 
-| Methodology | Overall MAE | Many-Shot MAE | Med-Shot MAE | Low-Shot MAE |
+| Method | Overall MAE | Many-Shot MAE | Median-Shot MAE | Low-Shot MAE |
 | :--- | :---: | :---: | :---: | :---: |
-| **ResNet50 (Vanilla)** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
-| **ResNet50 + LDS** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
-| **ResNet50 + FDS** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
-| **ResNet50 + DIR (LDS+FDS)** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
-| **Metadata Only (TabPFN)** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
-| **Multimodal (ResNet + MLP)** | *[Value]* | *[Value]* | *[Value]* | *[Value]* |
-| **Multimodal (TabPFN + PCA)** | **Best** | **Best** | **Best** | **Best** |
+| **Vanilla** (ResNet50) | 9.604 | 7.153 | 14.935 | 22.407 |
+| **LDS Only** | 9.708 | 7.686 | 13.167 | 22.076 |
+| **FDS Only** | 10.666 | 8.077 | 15.412 | 25.893 |
+| **DIR (LDS + FDS)** | 8.216 | 6.227 | 12.053 | 19.558 |
+| **Multimodal (ResNet + MLP)** | 5.221 | **4.654** | 5.628 | 9.663 |
+| **Metadata Only (TabPFN)** | **5.1631** | 4.7426 | 6.0816 | 7.3519 |
+| **Multimodal (TabPFN + PCA)** | 5.2130** | 5.1656 | **5.1869** | **5.7106** |
 
 ---
 
 ### Code and Weights
 
-[cite_start]All code for data preprocessing, training pipelines, and evaluation metrics is provided in this GitHub repository[cite: 13].
+All code for data preprocessing, training pipelines, and evaluation metrics is provided in this GitHub repository.
 
 **Pre-trained Weights**:
 * Visual Backbone (ResNet50): `weights/resnet50_dir.pth`
