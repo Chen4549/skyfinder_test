@@ -5,6 +5,8 @@ This repository contains the evaluation scripts for my work. The evaluation is d
 2. Performance of **TabPFN** using metadata only.
 3. Performance of the **TabPFN Multimodal Framework**.
 
+**Make sure to run these following scripts on a NVIDIA GPU using CUDA. I ran all the training and evaluation with one single A100 (80G) GPU**
+
 ---
 
 ## 1. Data Preparation
@@ -31,7 +33,7 @@ Ensure the directory structure follows this format:
 ---
 
 ## 2. Model Checkpoints
-1. Download the pre-trained weights for the visual backbone here: [Trained Visual Backbone (ResNet50): ](https://drive.google.com/file/d/1V1J7Kl0pYi-xetWGhLBhnC0gZFyYhwk1/view?usp=drive_link)
+1. Download the pre-trained weights for the visual backbone here: [My Trained Visual Backbone (ResNet50): ](https://drive.google.com/file/d/1V1J7Kl0pYi-xetWGhLBhnC0gZFyYhwk1/view?usp=drive_link)
 2. Place the downloaded file in the following location: `./imbalanced-regression/Skyfinder-dir/checkpoint/ckpt.best.pth.tar`
 
 ---
@@ -46,6 +48,8 @@ then
 
 `conda activate skyfinder-env`
 
+**Note** After setting up the skyfinder-env, please also install compatible torch version with your CUDA. [Torch Download Link](https://pytorch.org/get-started/previous-versions/)
+
 ---
 
 ## 4. Running Evaluation
@@ -54,7 +58,9 @@ Once the data and checkpoints are in place, you can proceed with the evaluation 
 
 **Evaluate TabPFN (Metadata Only)**
 
-To evaluate the performance of TabPFN using metadata only, run: `python tabPFN/tab_regression.py`
+To evaluate the performance of TabPFN using metadata only, run:
+
+`python tabPFN/tab_regression.py`
 
 script is under [TabPFN metadata only script](../tabPFN/tab_regression.py)
 
@@ -74,7 +80,9 @@ Low: MSE: 61.7589 | MAE: 7.3519 | Count: 414
 
 **Evaluate ResNet+DIR and Multimodal TabPFN**
 
-To get the performance results for both the ResNet+DIR model and the Multimodal TabPFN framework, run: `python ./fusion/concat_pfn.py`
+To get the performance results for both the ResNet+DIR model and the Multimodal TabPFN framework, run: 
+
+`python ./fusion/concat_pfn.py`
 
 script is under [ResNet+DIR and Multimodal TabPFN script](../fusion/concat_pfn.py)
 
