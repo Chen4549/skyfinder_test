@@ -9,7 +9,7 @@ The [Skyfinder dataset](https://cs.valdosta.edu/~rpmihail/skyfinder/) contains o
 * **Imbalance Problem**: The dataset exhibits a classic skewed, long-tailed distribution. Standard machine learning models naturally overfit to common "many-shot" temperature regions, leading to high bias and poor performance when predicting rare, critical extreme values.
 
 ## 🧠 Methodology: Deep Imbalanced Regression (DIR)
-We utilize the DIR framework proposed by [Yang et al. (2021)[cite_start]](https://dir.csail.mit.edu/) to improve generalization across the entire continuous target range.
+We utilize the DIR framework proposed by [Yang et al. (2021)](https://dir.csail.mit.edu/) to improve generalization across the entire continuous target range.
 
 * **Label Distribution Smoothing (LDS)**: Estimates the "effective" label density by convolving a symmetric kernel with the empirical distribution to account for information overlap between nearby continuous targets.
 * **Feature Distribution Smoothing (FDS)**: Calibrates biased feature statistics (mean and covariance) by leveraging similarities between neighboring temperature bins in the feature space.
@@ -52,4 +52,4 @@ We compared the Vanilla ResNet50 against various DIR configurations.
 **Conclusion**: The DIR method (LDS + FDS) successfully outperformed all other configurations, specifically in the **Low-shot** region, demonstrating its effectiveness in predicting extreme temperature values.
 
 ## 🔗 References
-* Yang, Y., Zha, K., Chen, Y. C., Wang, H., & Katabi, D. (2021). [Delving into Deep Imbalanced Regression](https://arxiv.org/abs/2102.09554). [cite_start]ICML. [cite: 1, 2, 19]
+* Yang, Y., Zha, K., Chen, Y. C., Wang, H., & Katabi, D. (2021). [Delving into Deep Imbalanced Regression](https://arxiv.org/abs/2102.09554). ICML.
