@@ -9,13 +9,11 @@ This project also integrate **Deep Imbalanced Regression (DIR)** techniques, tha
 ## 📋 Overview
 This repository explores various deep learning and tabular modeling approaches to classify data using both image features and structured metadata. Our research evaluates the efficacy of traditional CNN architectures against modern multimodal transformers.
 
----
-
 ## 📂 Table of Contents
 * [Dataset & Preprocessing](#-dataset-skyfinder)
 * [Methodology & Results](#-methodology-deep-imbalanced-regression-dir)
-    * [ResNet50 + DIR](#-implementation-details-resnet50--dir)
-    * [ResNet50 + DIR + Metadata Fusion](#-beyond-image-only-resnet-multimodal-fusion)
+    * [ResNet50 + DIR](#-methodology-deep-imbalanced-regression-dir)
+    * [ResNet50 + DIR + Metadata Fusion](#-Beyond-Image-Only:-ResNet-Multimodal-Fusion)
     * [TabPFN (Metadata Only)](#-improving-the-multimodal-framework-a-tabular-centric-approach)
     * [TabPFN (Multimodal)](#-improving-the-multimodal-framework-a-tabular-centric-approach)
 * [Limitations](#-limitations)
