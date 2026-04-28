@@ -39,7 +39,7 @@ To adapt the original DIR implementation to temperature data, I configured the f
 
 Below is the distribution after smoothing:
 <p align="center">
-  <img src="./assets/smoothed_dist_ks5_sigma2" width="500" alt="ResNet Fusion Architecture">
+  <img src="assets/smoothed_dist_ks5_sigma2.png" width="500" alt="Smoothed Distribution">
 </p>
 
 ## 📈 Performance Comparison
@@ -107,7 +107,7 @@ For this approach, I utilized **TabPFN**, a State-of-the-Art (SOTA) transformer-
 
 Below is the diagram of the workflow of this fusion framework:
 <p align="center">
-  <img src="./assets/Multi_pfn.png" width="500" alt="ResNet Fusion Architecture">
+  <img src="./assets/Multi_pfn.png" width="500" alt="TabPFN Fusion Architecture">
 </p>
 
 ### Experimental Results
