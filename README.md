@@ -36,7 +36,7 @@ My experiments are divided into three primary modeling strategies:
 | **Test** | 5,117 |
 
 #### Test Set Distribution (by Shot Frequency)
-To evaluate the effectiveness of the DIR approach across the entire range, the test set is categorized by how many samples per label were present in the original training data:
+To evaluate the effectiveness of the DIR approach across the entire range, the test set is categorized by how many samples per label were present in the original training data (cut off by 100/1000, will be explained in the next section):
 
 * **Many-shot**: 3,903 samples
 * **Medium-shot**: 800 samples
