@@ -47,9 +47,33 @@ We compared the Vanilla ResNet50 against various DIR configurations.
 | **FDS Only** | - | - | - |
 | **DIR (LDS + FDS)** | **Best** | - | **Best** |
 
-*Insert your specific data values here.*
-
 **Conclusion**: The DIR method (LDS + FDS) successfully outperformed all other configurations, specifically in the **Low-shot** region, demonstrating its effectiveness in predicting extreme temperature values.
+
+## Beyond Image-Only: Multimodal Fusion
+
+Predicting temperature accurately can be challenging when relying solely on visual cues from a window. To address this, we leverage the rich metadata provided by the **Skyfinder** dataset to build a more robust model.
+
+### Addressing Data Leakage
+While metadata like dew point or humidity are highly predictive, they often correlate so closely with temperature that including them can lead to **data leakage**—where the model "cheats" by using information that wouldn't be available or would be redundant in a real-world deployment. 
+
+To ensure the model is practical and generalizable, we utilize only the most accessible geographical and temporal information:
+* **Latitude**
+* **Longitude**
+* **Month**
+* **Hour**
+
+### Multimodal Architecture: Parallel Feature Fusion
+Our first approach involves a late-fusion strategy to combine visual and tabular data:
+
+1.  **Visual Branch**: The image passes through a **ResNet-50** backbone to extract a **2048-dimensional** feature vector representing visual scene context.
+2.  **Metadata Branch**: In parallel, the four metadata points are fed into a **2-layer Multi-Layer Perceptron (MLP)**, which compresses them into a **16-dimensional** metadata feature vector.
+3.  **Concatenation**: These two vectors are concatenated into a single **2064-dimensional** feature representation.
+4.  **Regression Head**: This combined vector is passed through the final regression layer to produce the temperature prediction.
+
+
+
+### Results
+By introducing these environmental priors, the model can "anchor" its visual findings to a specific geographic location and time of day. This pipeline resulted in a **profound improvement in performance** across the entire temperature range compared to the image-only baseline.
 
 ## 🔗 References
 * Yang, Y., Zha, K., Chen, Y. C., Wang, H., & Katabi, D. (2021). [Delving into Deep Imbalanced Regression](https://arxiv.org/abs/2102.09554). ICML.
