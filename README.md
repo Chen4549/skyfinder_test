@@ -2,6 +2,8 @@
 
 This repository focuses on using different methodologies including **DIR** and **multimodal approaches** to solve the problem for temperature prediction.
 
+Instructions for reproducing these results can be found in the: [Turorial](tutorial)
+
 ---
 
 ## 📋 Overview & Table of contents
