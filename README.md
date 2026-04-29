@@ -29,7 +29,7 @@ The [Skyfinder dataset](https://cs.valdosta.edu/~rpmihail/skyfinder/) contains o
 ## 🧠 Methodology: Deep Imbalanced Regression (DIR)
 I utilize the DIR framework proposed by [Yang et al. (2021)](https://dir.csail.mit.edu/) to improve generalization across the entire continuous target range.
 
-* **Label Distribution Smoothing (LDS)**: Estimates the "effective" label density by convolving a symmetric kernel with the empirical distribution to account for information overlap betIen nearby continuous targets.
+* **Label Distribution Smoothing (LDS)**: Estimates the "effective" label density by convolving a symmetric kernel with the empirical distribution to account for information overlap between nearby continuous targets.
 * **Feature Distribution Smoothing (FDS)**: Calibrates biased feature statistics (mean and covariance) by leveraging similarities between neighboring temperature bins in the feature space.
 
 ---
